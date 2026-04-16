@@ -6,35 +6,36 @@
 <title>AR3 Lab</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@200;300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Jost:wght@200;300&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
 :root{
-  --bg:#F4F0EA;
-  --dark:#18140F;
-  --mid:rgba(24,20,15,0.38);
-  --faint:rgba(24,20,15,0.1);
+  --bg:#1E1E1E;
+  --cream:rgba(235,232,226,0.9);
+  --mid:rgba(235,232,226,0.38);
+  --faint:rgba(235,232,226,0.08);
 }
 
-html{height:100%}
+html,body{height:100%;overflow:hidden}
+
 body{
   background:var(--bg);
-  color:var(--dark);
+  color:var(--cream);
   font-family:'Jost',sans-serif;
   font-weight:200;
-  min-height:100vh;
-  overflow-x:hidden;
 }
 
-/* ── MAIN PAGE ── */
 .page{
-  min-height:100vh;
+  height:100vh;
   display:flex;
   flex-direction:column;
   justify-content:space-between;
   padding:48px 52px;
   position:relative;
+  filter:blur(18px);
+  transform:scale(1.02);
+  transition:filter 0.04s linear, transform 0.04s linear;
 }
 
 .top{
@@ -44,41 +45,45 @@ body{
 }
 
 .brand{
-  font-family:'Jost',sans-serif;
   font-weight:300;
   font-size:13px;
   letter-spacing:0.18em;
   text-transform:uppercase;
-  color:var(--dark);
-  opacity:0;
-  animation:fadeIn 1.2s ease forwards 0.2s;
+  color:var(--cream);
 }
 
 .year{
-  font-family:'Jost',sans-serif;
   font-weight:200;
   font-size:12px;
   letter-spacing:0.15em;
   color:var(--mid);
-  opacity:0;
-  animation:fadeIn 1.2s ease forwards 0.4s;
 }
 
+/* CENTER */
 .center{
   position:absolute;
   top:50%;left:52px;right:52px;
   transform:translateY(-50%);
 }
 
+/* Small label above */
+.center-label{
+  font-weight:200;
+  font-size:10px;
+  letter-spacing:0.3em;
+  text-transform:uppercase;
+  color:var(--mid);
+  margin-bottom:20px;
+  display:block;
+}
+
 .main-text{
   font-family:'Cormorant Garamond',serif;
   font-weight:300;
-  font-size:clamp(48px,8vw,100px);
-  line-height:1;
+  font-size:clamp(52px,8.5vw,108px);
+  line-height:0.95;
   letter-spacing:-0.02em;
-  color:var(--dark);
-  opacity:0;
-  animation:fadeUp 1.4s cubic-bezier(0.16,1,0.3,1) forwards 0.5s;
+  color:var(--cream);
 }
 .main-text em{
   font-style:italic;
@@ -87,28 +92,30 @@ body{
 
 .dash{
   display:block;
-  font-size:13px;
+  font-size:18px;
   color:var(--faint);
-  margin:28px 0;
-  opacity:0;
-  animation:fadeIn 1s ease forwards 1.1s;
+  margin:24px 0;
 }
 
-.sub{
+.meta{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.meta-line{
+  font-weight:200;
   font-size:11px;
   letter-spacing:0.25em;
   text-transform:uppercase;
   color:var(--mid);
-  opacity:0;
-  animation:fadeIn 1s ease forwards 1.3s;
 }
 
+/* BOTTOM */
 .bottom{
   display:flex;
-  justify-content:space-between;
-  align-items:flex-end;
-  opacity:0;
-  animation:fadeIn 1.2s ease forwards 1.6s;
+  flex-direction:column;
+  align-items:flex-start;
 }
 
 .form-row{
@@ -122,184 +129,115 @@ body{
 .form-input{
   background:transparent;border:none;outline:none;
   font-family:'Jost',sans-serif;font-weight:200;
-  font-size:12px;letter-spacing:0.08em;
-  color:var(--dark);flex:1;
+  font-size:11px;letter-spacing:0.18em;
+  color:var(--cream);flex:1;
 }
 .form-input::placeholder{color:var(--mid)}
 
 .form-btn{
   background:transparent;border:none;cursor:pointer;
-  font-family:'Jost',sans-serif;font-weight:300;
-  font-size:11px;letter-spacing:0.15em;text-transform:uppercase;
-  color:var(--dark);padding-left:20px;white-space:nowrap;
-  transition:opacity 0.2s;
+  font-family:'Jost',sans-serif;font-weight:200;
+  font-size:11px;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--mid);padding-left:20px;white-space:nowrap;
+  transition:color 0.2s;
 }
-.form-btn:hover{opacity:0.5}
-
-.bottom-right{
-  font-size:9px;letter-spacing:0.2em;text-transform:uppercase;
-  color:var(--mid);text-align:right;line-height:2.2;
-}
-.bottom-right a{color:inherit;text-decoration:none;display:block;transition:color 0.2s}
-.bottom-right a:hover{color:var(--dark)}
+.form-btn:hover{color:var(--cream)}
 
 #confirm{
-  display:none;font-size:11px;letter-spacing:0.15em;
-  text-transform:uppercase;color:var(--mid);margin-top:8px;
+  display:none;
+  font-size:10px;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--mid);
+  margin-top:12px;
 }
 
-/* ── BLUR SCROLL SECTION ── */
-.blur-trigger{
-  height:120vh;
-  position:relative;
-}
-
-.blur-sticky{
-  position:sticky;
-  top:0;height:100vh;
-  overflow:hidden;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-/* The content sits behind blur */
-.blur-bg{
-  position:absolute;inset:0;
-  background:var(--bg);
-  display:flex;align-items:center;justify-content:center;
-  flex-direction:column;
-  text-align:center;
-  padding:48px;
-}
-
-.blur-label{
-  font-size:9px;letter-spacing:0.35em;text-transform:uppercase;
-  color:var(--mid);display:block;margin-bottom:32px;
-}
-
-.blur-title{
-  font-family:'Cormorant Garamond',serif;font-weight:300;
-  font-size:clamp(40px,7vw,88px);
-  letter-spacing:-0.02em;line-height:1;
-  color:var(--dark);margin-bottom:32px;
-}
-.blur-title em{font-style:italic;color:var(--mid)}
-
-.blur-line{
-  width:1px;height:40px;
-  background:linear-gradient(to bottom,var(--faint),transparent);
-  margin:0 auto 32px;
-}
-
-.blur-sub{
-  font-family:'Cormorant Garamond',serif;font-style:italic;
-  font-size:clamp(14px,1.6vw,18px);color:var(--mid);line-height:1.7;
-}
-
-/* The frosted glass overlay that blurs then clears */
-.blur-overlay{
-  position:absolute;inset:0;
-  backdrop-filter:blur(0px);
-  -webkit-backdrop-filter:blur(0px);
-  background:rgba(244,240,234,0);
-  will-change:backdrop-filter;
+/* SCROLL HINT */
+.scroll-hint{
+  position:fixed;
+  bottom:28px;right:52px;
+  font-size:9px;letter-spacing:0.25em;text-transform:uppercase;
+  color:var(--mid);
+  display:flex;align-items:center;gap:10px;
+  transition:opacity 0.4s;
   pointer-events:none;
 }
-
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(20px)}
-  to{opacity:1;transform:translateY(0)}
+.scroll-line{
+  width:28px;height:1px;background:var(--mid);
+  transform-origin:left;
+  animation:lb 2s ease-in-out infinite;
 }
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-
-@media(max-width:600px){
-  .page{padding:32px 28px}
-  .center{left:28px;right:28px}
-  .bottom{flex-direction:column;align-items:flex-start;gap:32px}
-  .form-row{min-width:0;width:100%}
-  .bottom-right{text-align:left}
+@keyframes lb{
+  0%,100%{opacity:0.3;transform:scaleX(1)}
+  50%{opacity:0.8;transform:scaleX(0.5)}
 }
 </style>
 </head>
 <body>
 
-<div class="page">
+<div class="page" id="page">
   <div class="top">
     <span class="brand">AR3 Lab</span>
     <span class="year">2026</span>
   </div>
 
   <div class="center">
+    <span class="center-label">Early access only</span>
     <h1 class="main-text">
-      Early<br><em>access</em><br>only.
+      Engineered<br><em>for results.</em>
     </h1>
     <span class="dash">—</span>
-    <p class="sub">Performance Skincare · Madrid</p>
+    <div class="meta">
+      <span class="meta-line">Performance Skincare</span>
+      <span class="meta-line">Launching 2026</span>
+    </div>
   </div>
 
   <div class="bottom">
-    <div>
-      <div class="form-row">
-        <input class="form-input" id="emailIn" type="email" placeholder="your@email.com" autocomplete="email">
-        <button class="form-btn" onclick="sub()">Request Access →</button>
-      </div>
-      <div id="confirm">You're on the list.</div>
+    <div class="form-row">
+      <input class="form-input" id="emailIn" type="email" placeholder="your@email.com" autocomplete="email">
+      <button class="form-btn" onclick="sub()">Request Access →</button>
     </div>
-    <div class="bottom-right">
-      <a href="#">Instagram</a>
-      <a href="mailto:hello@ar3lab.com">Contact</a>
-    </div>
+    <div id="confirm">You're on the list.</div>
   </div>
 </div>
 
-<!-- BLUR SCROLL -->
-<div class="blur-trigger" id="blurTrigger">
-  <div class="blur-sticky">
-
-    <!-- Content underneath -->
-    <div class="blur-bg">
-      <span class="blur-label">Something is coming</span>
-      <h2 class="blur-title">AR3<br><em>Lab.</em></h2>
-      <div class="blur-line"></div>
-      <p class="blur-sub">Engineered for results.<br>Launching 2026.</p>
-    </div>
-
-    <!-- Overlay that blurs then clears -->
-    <div class="blur-overlay" id="blurOverlay"></div>
-
-  </div>
+<div class="scroll-hint" id="scrollHint">
+  <div class="scroll-line"></div>
+  Scroll
 </div>
 
 <script>
-const trigger = document.getElementById('blurTrigger');
-const overlay = document.getElementById('blurOverlay');
-const MAX_BLUR = 22;
+const page = document.getElementById('page');
+const hint = document.getElementById('scrollHint');
+const MAX  = 18;
+let scrollY = 0;
+const TOTAL = window.innerHeight;
 
-function onScroll(){
-  const rect    = trigger.getBoundingClientRect();
-  const total   = trigger.offsetHeight - window.innerHeight;
-  const scrolled = Math.max(0, -rect.top);
-  // 0→0.4 = blur builds up, 0.4→1 = blur clears
-  const p = Math.min(1, scrolled / total);
-
-  let blur;
-  if(p < 0.45){
-    // Phase 1: appear with blur (0 → MAX)
-    blur = MAX_BLUR * (p / 0.45);
-  } else {
-    // Phase 2: clear (MAX → 0)
-    blur = MAX_BLUR * (1 - (p - 0.45) / 0.55);
-  }
-
-  overlay.style.backdropFilter = `blur(${blur}px)`;
-  overlay.style.webkitBackdropFilter = `blur(${blur}px)`;
-  // fade in the whole section
-  overlay.parentElement.parentElement.style.opacity = Math.min(1, p / 0.1);
+function update(){
+  const p = Math.min(1, scrollY / TOTAL);
+  const blur = MAX * (1 - p);
+  const scale = 1.02 - 0.02 * p;
+  page.style.filter    = `blur(${blur}px)`;
+  page.style.transform = `scale(${scale})`;
+  hint.style.opacity   = Math.max(0, 1 - p * 3);
 }
 
-window.addEventListener('scroll', onScroll, {passive:true});
-onScroll();
+window.addEventListener('wheel', e => {
+  scrollY = Math.max(0, Math.min(TOTAL, scrollY + e.deltaY * 0.8));
+  update();
+}, {passive:true});
+
+let touchStart = 0;
+window.addEventListener('touchstart', e => {
+  touchStart = e.touches[0].clientY;
+}, {passive:true});
+window.addEventListener('touchmove', e => {
+  const dy = touchStart - e.touches[0].clientY;
+  scrollY = Math.max(0, Math.min(TOTAL, scrollY + dy * 1.2));
+  touchStart = e.touches[0].clientY;
+  update();
+}, {passive:true});
+
+update();
 
 function sub(){
   const v = document.getElementById('emailIn').value.trim();
@@ -308,7 +246,7 @@ function sub(){
   document.getElementById('confirm').style.display = 'block';
 }
 document.getElementById('emailIn').addEventListener('keypress', e => {
-  if(e.key==='Enter') sub();
+  if(e.key === 'Enter') sub();
 });
 </script>
 </body>
